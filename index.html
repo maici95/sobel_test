@@ -60,6 +60,8 @@
     <canvas id="outImg"></canvas>
     <div id="test"></div>
 
+    <script src="sobel.js"></script>
+
     <button onclick="sobelImage()">Sobel</button><br/><br/>
     color strength: <input type="range" min="0.1" max="3" step="0.1" value="1" onchange="setMltp(event)"><br/>
     min draw: <input onchange="setMinDraw(event)" value="-1000"><br/>
@@ -68,6 +70,5 @@
     image under: <input type="checkbox" onclick="setImgUnder(event)" checked><br/>
     border color: <input onchange="setBorderColor(event)" value="1,1,1"><br/>
 
-    <script src="sobel.js"></script>
 </body>
 
