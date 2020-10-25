@@ -1,0 +1,58 @@
+
+
+
+<!-- <style>
+    #canvas, #resultCanvas, #finalCanvas, canvas {
+        border: 4px dashed #ddd;
+        width: 500px;
+        height: 500px;
+    }
+    #resultCanvas {
+    }
+    #images {
+        position: absolute;
+        margin-top: 2000px;
+    }
+</style>
+
+
+<div id="images">
+    <img src="wiki.png">
+    <img src="monkey.jpg">
+    <img src="people.jpg">
+    <img src="download.jpg">
+    <img src="download.png">
+    <img src="valve.png">
+</div>
+
+    <canvas id="inImg"></canvas>
+
+    <canvas width="300" height="300" id="finalCanvas"></canvas>
+    <canvas width="300" height="300" id="canvas"></canvas>
+    <canvas width="300" height="300" id="resultCanvas"></canvas>
+    <script src="index.js"></script>
+-->
+
+
+<style>
+    body {
+        background: #333;
+    }
+    canvas {
+        border: 1px solid #ddd;
+    }
+    button {
+        padding: 10 20;
+    }
+</style>
+
+<body>
+    <canvas id="inImg" ondrop="handleInImage(event)" ondragover="dragOverImage(event)"></canvas>
+    <canvas id="outImg"></canvas>
+    <div id="test"></div>
+
+    <button onclick="sobelImage()">Sobel</button>
+
+    <script src="sobel.js"></script>
+</body>
+
