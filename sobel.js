@@ -18,6 +18,32 @@ inImg.height = HEIGHT;
 outImg.width = WIDTH;
 outImg.height = HEIGHT;
 
+let mltp = 1;
+let minDraw = -1000;
+let maxDraw = 1000;
+let bgColor = '#ddd';
+let imgUnder = true;
+let userImg = null;
+let borderColor = [1,1,1];
+
+function setMltp(event) {
+    mltp = event.target.value;
+}
+function setMinDraw(event) {
+    minDraw = parseInt(event.target.value);
+}
+function setMaxDraw(event) {
+    maxDraw = parseInt(event.target.value);
+}
+function setBgColor(event) {
+    bgColor = event.target.value;
+}
+function setImgUnder(event) {
+    imgUnder = event.target.checked;
+}
+function setBorderColor(event) {
+    borderColor = event.target.value.split(',');
+}
 
 function handleInImage(event) {
     event.preventDefault();
@@ -33,6 +59,7 @@ function handleInImage(event) {
     reader.onloadend = function(e) {
         const img = new Image;
         img.src = e.target.result;
+        userImg = img;
         inContext.drawImage(img, 0, 0, WIDTH, HEIGHT);
     }
 
@@ -74,15 +101,28 @@ function dragOverImage(event) {
 
 
 function drawImageMatrix(matrix) {
+    outContext.clearRect(0, 0, WIDTH, HEIGHT);
+
+    outContext.fillStyle = bgColor;
+    outContext.fillRect(0, 0, WIDTH, HEIGHT);
+
+    if (imgUnder && userImg)
+        outContext.drawImage(userImg, 0, 0, WIDTH, HEIGHT)
+        
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[i].length; j++) {
     
             let c = matrix[i][j];
     
-            if (c > 0) {
-                c = (c * 0.5);
-                outContext.fillStyle = `rgb(${c},${c},${c})`;
-                outContext.fillRect(j, i, j+1, i+1);
+            if (c > minDraw && c < maxDraw) {
+                c = (c * mltp);
+                if (borderColor) {
+                    outContext.fillStyle = `rgb(${c * borderColor[0]},${c * borderColor[1]},${c * borderColor[2]})`;
+                } else {
+                    outContext.fillStyle = `rgb(${c},${c},${c})`;
+                }
+
+                outContext.fillRect(j, i, 1, 1);                
             }
         }
     }
